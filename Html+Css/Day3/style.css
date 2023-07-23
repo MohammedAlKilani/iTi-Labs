@@ -1,0 +1,61 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+p , div , span{
+    font-family: "Lucida Calligraphy";
+
+}
+div h1{
+    position: relative;
+    
+    left: 50vw;
+}
+#id{
+    width:100%;
+    height:30%;
+    background-color: red
+}
+.none-bullet-list{
+    list-style: none;
+}
+span#linksbar li>a{
+   color: red; 
+   background-color: pink;
+   text-decoration:none;
+}
+span#linksbar li>a:hover{
+   color: pink; 
+   background-color: red;
+   text-decoration:none;
+}
+span#content>h2+p{
+    font-weight: bold;
+    font-size: 12px;
+}
+div#loginform{
+    border: 2px dashed rgb(20,70,60) ;
+
+}
+input[type="text"]{
+    background-color: yellow;
+}
+input[type="text"]:focus{
+    background-color: white;
+}
+.tabled-bordered[value=]{
+
+}
+.tabled-bordered p{
+    display: table-cell;
+    padding: 5px;
+    border: 2px ;
+    border-color: black ;
+    border-style: dashed;
+    
+}
+#loginform{
+    border:dashed 2px;
+    color: rgb(20,70,60);
+}
+

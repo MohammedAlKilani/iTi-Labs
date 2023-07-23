@@ -1,0 +1,6 @@
+ul{
+    background-color: red;
+    display: none;
+    width: fit-content;
+}
+/* div:hover ul{display: block;} */

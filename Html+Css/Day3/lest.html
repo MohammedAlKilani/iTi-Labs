@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="lest.css" rel="stylesheet">
+
+</head>
+<body>
+    <script>
+       function myFunction(e){
+        if(document.getElementById(e).style.display == "block"){
+            document.getElementById(e).style.display = "none";
+        }else {
+            document.getElementById(e).style.display = "block";
+        }
+        
+        }
+       
+
+    </script>
+<div onclick="myFunction('list')">list
+    
+</div>
+<ul id="list" >
+        <li onclick="myFunction('list1')">icon <ul id="list1" >
+            <li>icon</li>
+            <li>icon</li>
+            <li>icon</li>
+            <li>icon</li>
+        </ul></li>
+        <li onclick="myFunction('list2')">icon<ul id="list2" >
+            <li>icon</li>
+            <li>icon</li>
+            <li>icon</li>
+            <li>icon</li>
+        </ul></li>
+        <li onclick="myFunction('list3')">icon<ul id="list3" >
+            <li>icon</li>
+            <li>icon</li>
+            <li>icon</li>
+            <li>icon</li>
+        </ul></li>
+        <li onclick="myFunction('list4')">icon<ul id="list4" >
+            <li>icon</li>
+            <li>icon</li>
+            <li>icon</li>
+            <li>icon</li>
+        </ul></li>
+    </ul>
+    
+</body>
+</html>

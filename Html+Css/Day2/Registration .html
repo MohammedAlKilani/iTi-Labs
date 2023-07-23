@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration </title>
+</head>
+<body>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: aquamarine;
+        }
+        form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: cyan;
+    height: 100vh
+  
+}
+footer{
+    display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+    </style>
+    <header>
+        <h1 style="text-align: center; text-decoration: double;">Registration</h1>  
+    </header>
+    <main >
+        <form action="Thankyou.htm" method="get" >
+            <section><input type="hidden" name="userID" value="125" tabindex="1">
+            <input type="text" name="FirstName" placeholder="First Name" readonly tabindex="2">
+            <input type="text" name="lastName" placeholder="last Name" readonly tabindex="5">
+            <input type="email" name="email" placeholder="email" readonly tabindex="6">
+            <input type="password" name="password" placeholder="password" max="15" min="8" tabindex="3">
+            <input type="password" name="Rpassword" placeholder="Repeat password" max="15" min="8" tabindex="4"></section>
+            
+            <input type="date" name="BirthData" min="2000-01-02" max="2023-7-17">
+            <input type="file" name="UserPicture" >
+            <fieldset>
+                <legend>Gender </legend>
+                <input type="radio" name="Gender" value="M" id="M"> <label for="M"> Male</label>
+                <input type="radio" name="Gender" value="F" id="F"> <label for="F"> Female</label>
+            </fieldset>
+            <select name="Faculty ">
+                <option value="MIS">نظم معلومات اداريه</option>
+                <option>طب</option>
+                <option>هندسه</option>
+                <option value="CS">حسبات و معلومات</option>
+            </select>
+            <fieldset>
+                <legend>Interests</legend>
+                <input type="checkbox" name="Interests" value="Programming" id="Programming" ><label for="Programming">Programming</label>
+                <input type="checkbox" name="Interests" value="reading" id="reading" ><label for="reading">reading</label>
+                <input type="checkbox" name="Interests" value="swimming" id="swimming" ><label for="swimming">swimming</label>
+            </fieldset>
+            <textarea cols="46" role="3" placeholder="About you" name="AboutYou"></textarea>
+            <input type="checkbox" checked disabled id="agreed"> <label for="agreed">I agreed to terms and condition checkbox</label>
+            <br>
+            <a href="termsCondition.html">terms and condition</a>
+            <br>
+            <input type="submit" value="submit">
+            <input type="reset" value="reset">
+        </form>
+
+    </main>
+    <footer>
+        <a href="#">HOME</a>
+        <a href="About.html">About</a>
+        <a href="Contact.html">Contact</a>
+    </footer>
+    
+</body>
+</html>
