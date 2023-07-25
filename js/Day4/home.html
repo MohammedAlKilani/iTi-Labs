@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="home.css" rel="stylesheet">
+</head>
+<body>
+    <form>
+        <input type="text" name="name" id="name" placeholder="Enter your Name">
+        <div id="inValid"></div>
+        <br>
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <br>
+        <select>
+        <option>سمنود</option>
+        <option>القاهره</option>
+        <option>المنيا</option>
+        <option>الاسكندريه</option>
+        </select>
+        <br>
+        <select id="gender" name="gender">
+        <option>Male</option>
+        <option>female</option>
+        </select>
+        <br>
+        
+        <input type="password" id="password"  placeholder="password" required>
+        <input type="button" value="👁" id="eyePassword">
+        <br>
+
+        <input type="password" id="passwordRepeat" placeholder="Repeat password" required>
+        <input type="button" value="👁" id="eyePasswordRepeat">
+        <div id="passwordRepeatDiv"></div>
+        <br>
+
+        <label for="agree" id="labelAgree">I agree to Terms and conditions</label><input type="checkbox" id="agree">
+        <input type="submit" value="Register">
+
+    </form>
+    <br>
+    <div id="formDiv"></div>
+    <input type="button" id="stars" value="تقيم الموقع">
+    <div id="divS" style="display: flex; flex-direction: row-reverse; width: fit-content;"></div>
+    <input type="text" placeholder="search box" id="searchBox"> 
+
+<script src="home.js"></script>
+
+</body>
+</html>
