@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        var arrLocal =[]
+          arrLocal = JSON.parse(localStorage.getItem("userLest"))
+         console.log(localStorage.getItem("id"))
+         arrLocal.forEach(element => {
+            console.log(element)
+        var xhttp = new XMLHttpRequest()
+    xhttp.open("Get", `https://fakestoreapi.com/products/${element}`, true)
+    xhttp.send()
+ xhttp.onreadystatechange = function (){
+    if (this.status == 200 && this.readyState == 4) {
+        var brodact = JSON.parse(this.responseText)
+        // for (let brodact of dataServer) {
+            var brodactsDiv = document.createElement("div")
+            var brodactName = document.createElement("option")
+            var brodactlabel = document.createElement("label")
+            var brodactImg = document.createElement("img")
+            var brodactAdd = document.createElement("input")
+            var brodactNameText = document.createTextNode(brodact.title)
+            var brodactlabelText = document.createTextNode(brodact.price)
+            
+            
+            brodactName.appendChild(brodactNameText)
+            brodactlabel.appendChild(brodactlabelText)
+            /////////////////
+            brodactAdd.value = "remov from "
+            brodactAdd.type ="button"
+            
+           
+            brodactAdd.addEventListener("click",(e)=>{
+                brodactsDiv.style.display = "none"
+                var newArrLocal = arrLocal.filter((id)=>{
+                return (id !=element)
+            })
+            console.log(newArrLocal)
+            
+                localStorage.setItem("id",JSON.stringify([...newArrLocal]) )
+            })
+            /////////////////
+             brodactImg.src = brodact.image
+             brodactImg.style.width = "200px"
+             brodactImg.style.height = "200px"
+             
+             
+             brodactsDiv.appendChild(brodactName)
+             brodactsDiv.appendChild(brodactImg)
+             brodactsDiv.appendChild(brodactlabel)
+             brodactsDiv.appendChild(brodactAdd)
+             document.body.appendChild(brodactsDiv)
+             
+            
+                
+            // }
+    }
+ }
+       }); 
+        
+    </script>
+</body>
+</html>
