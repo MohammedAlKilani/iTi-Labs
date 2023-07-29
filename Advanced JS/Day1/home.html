@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+
+
+
+
+
+
+    <script>
+        // function specialMultiply (...numbers){
+        //    if(numbers[1]) {
+        //     return numbers[0]+numbers[1]
+        //    }else{
+        //     return function(number2){
+        //       return  numbers[0]+number2
+        //     }
+        //    }
+           
+        // }
+        function specialMultiply (){
+           if(arguments[1]) {
+
+            return arguments[0]+arguments[1]
+           }else{
+            return (function(number1){
+                return function(number2){
+              return  number1+number2
+            }})(arguments[0])
+           }
+           
+        }
+
+        let specialMultiplyVar = specialMultiply(4)
+        console.log(specialMultiplyVar(5))
+//////////////////////////
+        function guessingGame (){
+            var guesses = 0
+            var answer = Math.floor(Math.random()*10)
+             
+                return function(guess){
+                if(guess==answer){
+                    return "You got it!"
+                }else if(parssPositive(guess-answer)>5){
+                        return "Your guess is too high!"
+                }else{
+                    return "Your guess is too high!"
+                }
+
+            }}  
+
+
+        
+    function parssPositive(number){
+    if(number>0){
+        return number
+    }else{
+        return( number * -1)
+    }
+}
+var guessin1 = guessingGame()
+var guessin2 = guessingGame()
+
+console.log(guessin1(5))
+console.log(guessin2(3))
+
+
+    </script>
+</body>
+</html>
