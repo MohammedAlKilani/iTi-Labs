@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Queue{
+            #top=0
+            
+            #arrayElements =[]
+            constructor(maxSize){
+                this.maxSize= maxSize;
+                
+            }
+            getCurrentSize(){
+                return this.#arrayElements.length
+            }
+            #getQueueElements(){
+                return this.#top
+
+            }
+            viewQueue=this.#getQueueElements
+            #GetQueueElements(_this){
+                var arryQ =_this.#arrayElements
+                
+                return [...arryQ]
+               }
+            returnQueue(){
+                
+               return this.#GetQueueElements
+            }
+
+            InQueue(element){
+                    if(this.#top>=this.maxSize){
+                        throw "Q is full"
+                    }
+                this.#arrayElements.push(element)
+                ++this.#top
+            }
+            DeQueue(){
+                this.#arrayElements.shift()
+                --this.#top
+            }
+
+        }
+        const q1 = new Queue(2)
+
+       var qArr = q1.returnQueue()
+       console.log(qArr)
+       q1.InQueue("1")
+       q1.InQueue("2")
+    //    q1.InQueue("3")
+       q1.DeQueue()
+       console.log(qArr(q1))
+       Queue.prototype.isEmpty= function(){
+        if (this.viewQueue()){
+            return false
+        }
+        return true
+       }
+      console.log(q1.isEmpty()) 
+    </script>
+</body>
+</html>
