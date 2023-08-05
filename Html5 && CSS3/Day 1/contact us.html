@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ondrop="drop(this)" ondragover="allowDrop(event)">
+    <form>
+    <label for="userName">your name</label> <input type="text" name="name" id="userName" placeholder="your name"><br>
+    <label for="salary">salary rang</label> <input type="range" name="salary" id="salary" min="0" max="10000" step="500"><br>
+    <label for="useEmail">your email</label> <input type="email" id="useEmail"><br>
+    <label for="userPhoto">user photo</label> <input type="file" name="userPhoto" accept="image/*" id="userPhoto"><br>
+    <label for="userUrl">your url</label> <input type="url" name="userUrl"><br>
+    <label for="password">password</label> <input type="password" name="password" required>
+     <input type="hidden" name="id" value="1"><br>
+    <label for="wakeup">wake up</label> <input type="time" name="wakeup" id="wakeup"><br>
+    <label for="sleep">sleep</label> <input type="time" name="sleep" id="sleep"><br>
+    <label for="birthDay">birthDay</label> <input type="date" min="1960-01-01" max="2023-12-31" name="birthDay" id="birthDay"><br>
+    <label for="favoriteColor">your favorite Color</label> <input type="color" name="favoriteColor" id="favoriteColor"><br>
+    <label for="phone"></label> <input type="tel" id="phone" name="phone" placeholder="0201005509999" pattern="/020(10|12|15|11)[0-9]{8}/"><br>
+    <label for="Ourstaff">Our staff</label> <meter max="100" min="1" value="20" low="30" high="80" id="Ourstaff"></meter><br>
+     <input type="submit">
+     
+</form>
+
+<div  ondrop="drop(this)" ondragover="allowDrop(event)" style="width: 200px; height: 200px; background-color: aquamarine;"></div>
+
+<img  src="https://camo.githubusercontent.com/5f54c0817521724a2deae8dedf0c280a589fd0aa9bffd7f19fa6254bb52e996a/68747470733a2f2f6e6573746a732e636f6d2f696d672f6c6f676f2d736d616c6c2e737667" draggable="true" ondragstart="drag(this)" width="100px" height="100px">
+<script>
+    let element 
+   function drag(ele){
+    element = ele
+}
+
+
+let targetEle
+function allowDrop(ev){
+    targetEle = ev.target
+    ev.preventDefault()
+    ev.stopPropagation()
+    
+}
+function drop(ele){
+    targetEle.appendChild(element)
+ 
+}
+</script>
+</body>
+</html>

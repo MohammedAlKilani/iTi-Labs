@@ -1,0 +1,195 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <video width="500px" controls id="vidXp" autoplay muted>
+        <source src="Microsoft Windows XP Startup Sound [7nQ2oiVqKHw].mp4" type="video/mp4">
+    </video>
+    <svg width="100px">
+        <circle cx="40" cy="40" r="20" fill="red" stroke="black" id="circle"></circle>
+    </svg>
+    <img src="sad.png" width="100px" id="sadImg">
+    <svg width="100px">
+        <linearGradient  x1="0%" y1="30%" x2="50%" y2="20%"id="linG">
+                <stop offset="0%" stop-color="red" />
+                <stop offset="50%" stop-color="blue" />
+              </linearGradient>
+              
+        <circle cx="40" cy="40" r="30" fill="red" fill-opacity="0.2" stroke="black" >
+            
+        </circle> 
+        <text x="10" y="40" style="font-size: small;" >محمد الكيلاني</text>
+    </svg>
+    <svg width="100px">
+
+        <circle cx="40" cy="40" r="30"  fill="url(#linG)"  stroke="black" id="circl2" >
+           
+        </circle> 
+        
+    </svg>
+    <svg width="300px">
+        <circle cx="50" cy="50" r="30" fill="gray"></circle>
+        <rect x="10" y="85" width="80" height="100" rx="20"></rect>
+        <rect x="35" y="50" width="30" height="20" rx="5" fill="white"></rect>
+        <line  x1="0" y1="100" x2="50" y2="50" stroke="white"></line>
+        <line  x1="0" y1="30" x2="50" y2="60" stroke="white"></line>
+        <line  x1="100" y1="100" x2="50" y2="50" stroke="white"></line>
+        <line  x1="100" y1="30" x2="50" y2="60" stroke="white"></line>
+        <circle cx="40" cy="38" r="3" fill="white"></circle>
+        <circle cx="60" cy="38" r="3" fill="white"></circle>
+
+    </svg>
+    <canvas id="myCanvas" width="200" height="200" style="border: 10px red ; border-style: dotted;">
+    
+    </canvas>
+    
+   <br>
+<br>
+<br>
+<br>
+<canvas id="Canvas2" width="240" height="297" style="border:1px solid grey;"></canvas> 
+<canvas id="Canvas3" width="240" height="297" style="border:1px solid grey;"></canvas> 
+<br>
+<input type="text" id="animatedBar">
+
+    <script>
+
+     var vidXp = document.getElementById("vidXp")
+     var circle = document.getElementById("circle")
+     var sadImg = document.getElementById("sadImg")
+     addEventListener("load",()=>{
+        vidXp.play()
+     })
+     circle.addEventListener("mousedown",()=>{
+        circle.style.fill ="blue"
+     })
+     circle.addEventListener("mouseup",()=>{
+        circle.style.fill ="red"
+     })
+     sadImg.addEventListener("mousedown",()=>{
+        sadImg.src="smiley.png"
+     })
+     sadImg.addEventListener("mouseup",()=>{
+        sadImg.src ="sad.png"
+     })
+     
+     
+     
+    </script> 
+
+    
+    <script>
+        let x
+        let y 
+const mcanvas = document.getElementById("myCanvas");
+const ctx = mcanvas.getContext("2d");
+
+ctx.fillStyle = "#FF0000";
+
+mcanvas.addEventListener("mousemove",(event)=>{
+     x = event.clientX; 
+ y = event.clientY; 
+
+})
+let drown;
+mcanvas.addEventListener("mousedown",(event)=>{
+
+    var rect = mcanvas.getBoundingClientRect()
+    
+     drown = function(){
+    ctx.fillRect(x-rect.x,y-rect.y, 5,5 );}
+    mcanvas.addEventListener("mousemove",drown)
+   console.log(x,y)
+   console.log(rect)
+  
+
+    switch (event.button) {
+        case 0:
+             ctx.fillStyle="blue"
+        
+            break;
+        case 2:
+             event.preventDefault()
+        ctx.fillStyle="white"
+      
+            break;
+    
+    
+}
+
+})
+mcanvas.addEventListener("mouseup",()=>{
+    mcanvas.removeEventListener("mousemove",drown)
+})
+mcanvas.addEventListener("mouseleave",()=>{
+    mcanvas.removeEventListener("mousemove",drown)
+})
+
+</script>
+<script>
+//     var animatedBar =document.getElementById("animatedBar")
+//  console.log("animatedBar")
+window.onload = function() {
+const canvas = document.getElementById("Canvas2");
+const ctx1 = canvas.getContext("2d");
+const img2 = document.createElement("img")
+img2.setAttribute("src","./sad.png")
+ctx1.drawImage(img2, 0, 0);
+canvas.onmousedown = function(){
+    img2.setAttribute("src","./smiley.png")
+    ctx1.drawImage(img2, 0, 0);
+}
+canvas.onmouseup = function(){
+    img2.setAttribute("src","./sad.png")
+    ctx1.drawImage(img2, 0, 0);
+}
+}
+// ctx1.beginPath();
+
+// ctx1.stroke();
+ 
+    // animatedBar.addEventListener("change",()=>{
+    //     console.log(animatedBar.value)
+   
+       
+       
+       
+    //     console.log(canvas )
+       
+        
+    // })
+    const canvas3 = document.getElementById("Canvas3");
+const ctx3 = canvas3.getContext("2d");
+
+
+let sad=true ;
+// canvas3.onmousedown = function(){
+//         // ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+//     sad=false
+//     ctx3.clearRect(0, 0, canvas.width, canvas.height);
+
+//     ctx3.beginPath();
+
+//     ctx3.arc(100, 200, 50, 0, 1 * Math.PI ,false);
+//     ctx3.stroke();
+// }
+// canvas3.onmouseup = function(){
+//     sad =true
+//     ctx3.clearRect(0, 0, canvas.width, canvas.height);
+
+//     ctx3.beginPath();
+//     ctx3.arc(100, 200, 50, 0, 1 * Math.PI ,sad);
+//     ctx3.stroke();
+// }
+// ctx3.clearRect(0, 0, canvas.width, canvas.height);
+// ctx3.beginPath();
+// ctx3.arc(100, 200, 50, 0, 1 * Math.PI ,sad);
+// ctx3.stroke();
+    
+</script>
+</body>
+
+</html>
