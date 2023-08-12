@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.7.0.min.js"></script>
+
+</head>
+<body>
+    <section></section>
+    <script>
+         $(document).ready(function () {
+            function cryatUserCart(nameUser,email){
+        var divName = $("<div>")
+        var divEmail = $("<div>")
+        var divUser = $("<div>")
+            divName.html(nameUser)
+            divEmail.html(email)
+            
+            divUser.prepend(divEmail)
+            divUser.prepend(divName)
+            console.log(divUser[0])
+       $("section").append(divUser)
+             
+    }
+    async function getUsers(){
+const userData = new URLSearchParams(location.search)
+console.log(userData.get("id"))
+var res =   await fetch(`https://jsonplaceholder.typicode.com/users/${userData.get("id")}`)
+const user = await res.json()
+console.log(user)
+cryatUserCart(user.name,user.email)
+}
+getUsers()
+})
+    </script>
+</body>
+</html>

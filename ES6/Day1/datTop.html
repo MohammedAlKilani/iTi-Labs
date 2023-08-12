@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.7.0.min.js"></script>
+</head>
+<body>
+    <input type="text" id="dayText">
+    <input type="button" id="buttTip" value="get tep">
+    <div id="tep"></div>
+<script>
+    const dayTeps = new Map()
+    dayTeps.set("Saturday","the Saturday’s tip1")
+    dayTeps.set("Sunday","the Sunday’s tip2") 
+    dayTeps.set("Monday","the Monday’s tip3")
+    dayTeps.set("Tuesday","the Tuesday’s tip4")
+    dayTeps.set("Wednesday","the Wednesday’s tip5")
+    dayTeps.set("Thursday","the Thursday’s tip6")
+    dayTeps.set("Friday","the Friday’s tip7")
+    $(document).ready(function(){
+        $("#buttTip").click(function(){
+          const tip =  dayTeps.get($("#dayText").val())
+            $("#tep").html(tip)
+            alert(tip)
+        }
+    )})
+</script>
+</body>
+</html>

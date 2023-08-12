@@ -1,0 +1,119 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     
+        #d1{
+           width: fit-content; 
+           height: 100px;
+           background-color: blue;
+           border-radius: 10px; 
+           font-family: 'Courier New', Courier, monospace;
+           column-count: 3;
+        }
+        #dName{
+            
+            transform:rotate(270deg) ;
+            background-color: aqua;
+        }
+        #d3{
+            background-color: brown;
+            width: 100px;
+            height: 100px;
+            transition: all 2s ;
+        }
+        #d3:hover{
+            transform: rotate(90deg);
+            width: 200px;
+            height: 200px;
+        }
+        #dicTigerTra{
+            position: relative;
+            transition: transform 15s ;
+        }
+        #dicTigerTra:hover{
+         
+            transform: translateX(100vw);
+            
+        }
+        #tigerTra{
+            position: relative;
+           
+            
+        }
+        #tigerTra:hover{
+           
+            transform: rotateY(180deg);
+            
+            
+        }
+        #dicTigerTra2{
+           
+        }
+        #tigerTra2{
+            position: relative;
+            animation-name: tiger;
+            animation-direction: normal;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-duration: 15s;
+            
+        }
+        @keyframes tiger{
+            0%{transform: translateX(0vw) rotatey(180deg); }
+            50%{transform:translateX(100vw) rotatey(180deg);}
+            55%{transform:translateX(100vw) rotatey(0deg);}
+            100%{transform:translateX(0vw) rotatey(0deg);}
+            
+
+        }
+        @keyframes nav{
+            0%{transform: translateX(0vw) }
+            50%{transform:translateX(100vw) }
+            55%{transform:translateX(100vw) }
+            100%{transform:translateX(0vw) }
+            
+
+        }
+        #d4{
+            position: absolute;
+            animation-name: nav;
+            animation-direction: normal;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-duration: 15s;
+        }
+       
+    </style>
+</head>
+<body>
+    <div id="d1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus in, officia nisi ratione earum voluptate officiis illum. Dicta, rerum voluptas deleniti repellat consequatur ut. Consectetur quia explicabo totam harum culpa!</div>
+    <div id="dName">Muhammed</div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="d3"></div>
+    <br>
+    <div id="dicTigerTra">
+       <img src="tiger.gif" id="tigerTra"> 
+    </div>
+    <div id="dicTigerTra2">
+       <img src="tiger.gif" id="tigerTra2"> 
+    </div>
+    <div id="d4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi ratione recusandae, nulla dicta alias in ut odio rerum quaerat quas aspernatur officiis, error temporibus corrupti similique blanditiis, natus dolor sed!</div>
+
+
+
+
+</body>
+</html>

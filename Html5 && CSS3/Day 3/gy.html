@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="d1"></div>
+    <input type="button"id="B1" value="click">
+    <script>
+        document.getElementById("B1").style.backgroundColor = "red"
+        document.getElementById("B1").onclick =()=>{
+         navigator.geolocation.getCurrentPosition(myPosition);
+         function myPosition(position) {
+            // open(`https://www.google.com/maps/search/?api=1&query=${position.coords.latitud}%2C${position.coords.longitude}`,_blank)
+            location.href = `https://www.google.com/maps/search/?api=1&query=${position.coords.latitude}%2C${position.coords.longitude}`
+            // document.getElementById("d1").innerHTML = `https://www.google.com/maps/search/?api=1&query=${position.coords.latitude}%2C${position.coords.longitude}`
+            
+}}
+    </script>
+</body>
+</html>
