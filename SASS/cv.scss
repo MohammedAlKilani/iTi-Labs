@@ -1,0 +1,53 @@
+@import "color.scss";
+
+@function maxFont ($size){
+    @if($size>20px){
+        @return 20Px
+    } @else {
+        @return $size
+    }
+}
+.remve_padding_margin{
+    padding: 0;
+    margin: 0;
+}
+body{
+    @extend .remve_padding_margin;
+}
+@mixin border($color) {
+    border: $color solid 1px;
+}
+ul{
+    
+    list-style:none ;
+}
+main{
+    @extend .remve_padding_margin;
+    display:flex;
+    justify-content: space-around;
+
+    nav{
+        &:hover{
+            background-color: black;
+        }
+        @for $i from 1 to 4 {
+            li:nth-child(#{$i}){
+                background-color: lighten($color4, $i * 10%);
+                
+            }
+        }
+        @include border($color1);
+        @each $size in $sizes {
+            .size#{$size} {
+              font-size: $size;
+            }
+        }
+    }
+    section{
+        @include border($color2);
+        p{
+            font-size: maxFont($fontSize);
+            width: 350px;
+        }
+    }
+}

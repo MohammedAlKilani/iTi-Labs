@@ -1,0 +1,49 @@
+.remve_padding_margin, main, body {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+main {
+  display: flex;
+  justify-content: space-around;
+}
+main nav {
+  border: #73c2fb solid 1px;
+}
+main nav:hover {
+  background-color: black;
+}
+main nav li:nth-child(1) {
+  background-color: #1a1a1a;
+}
+main nav li:nth-child(2) {
+  background-color: #333333;
+}
+main nav li:nth-child(3) {
+  background-color: #4d4d4d;
+}
+main nav .size40px {
+  font-size: 40px;
+}
+main nav .size50px {
+  font-size: 50px;
+}
+main nav .size80px {
+  font-size: 80px;
+}
+main nav .size100px {
+  font-size: 100px;
+}
+main section {
+  border: red solid 1px;
+}
+main section p {
+  font-size: 20Px;
+  width: 350px;
+}
+
+/*# sourceMappingURL=cv.css.map */
