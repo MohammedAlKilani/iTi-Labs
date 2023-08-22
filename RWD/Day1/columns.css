@@ -1,0 +1,81 @@
+.col-1 {
+  box-sizing: border-box;
+  width: 6.25%;
+}
+
+.col-2 {
+  box-sizing: border-box;
+  width: 12.5%;
+}
+
+.col-3 {
+  box-sizing: border-box;
+  width: 18.75%;
+}
+
+.col-4 {
+  box-sizing: border-box;
+  width: 25%;
+}
+
+.col-5 {
+  box-sizing: border-box;
+  width: 31.25%;
+}
+
+.col-6 {
+  box-sizing: border-box;
+  width: 37.5%;
+}
+
+.col-7 {
+  box-sizing: border-box;
+  width: 43.75%;
+}
+
+.col-8 {
+  box-sizing: border-box;
+  width: 50%;
+}
+
+.col-9 {
+  box-sizing: border-box;
+  width: 56.25%;
+}
+
+.col-10 {
+  box-sizing: border-box;
+  width: 62.5%;
+}
+
+.col-11 {
+  box-sizing: border-box;
+  width: 68.75%;
+}
+
+.col-12 {
+  box-sizing: border-box;
+  width: 75%;
+}
+
+.col-13 {
+  box-sizing: border-box;
+  width: 81.25%;
+}
+
+.col-14 {
+  box-sizing: border-box;
+  width: 87.5%;
+}
+
+.col-15 {
+  box-sizing: border-box;
+  width: 93.75%;
+}
+
+.col-16 {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/*# sourceMappingURL=columns.css.map */
