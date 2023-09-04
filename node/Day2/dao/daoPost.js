@@ -57,5 +57,5 @@ class Post{
 
 }
 
-module.exports = new Post ()
+module.exports =  Post
    

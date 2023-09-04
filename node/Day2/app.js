@@ -1,8 +1,10 @@
 const http = require("http")
 const URL = require("node:url")
-const userDB = require("./dao/daoUser") 
-const postDB = require("./dao/daoPost") 
-const { url } = require("inspector")
+const UserClass =  require("./dao/daoUser")
+const PostClass = require("./dao/daoPost")
+const userDB =  new UserClass()
+const postDB = new PostClass() 
+
 
 http.createServer((req,res)=>{
 
@@ -83,15 +85,15 @@ http.createServer((req,res)=>{
    }else if(req.method=="PATCH"&&req.url=="/post"){
      res.statusCode = 201
      req.on("data",(chunk)=>{
-       console.log(chunk)
-          const user = JSON.parse(chunk) 
-        let db =  postDB.updatePost(user)
+          const post = JSON.parse(chunk) 
+        let db =  postDB.updatePost(post)
+        
           res.end(JSON.stringify(db))
           
      })
     
   }else if(req.method=="DELETE"&&req.url=="/post"){
-     //  res.statusCode = 201
+     
       
       req.on("data",(chunk)=>{
         console.log(chunk)
@@ -101,7 +103,7 @@ http.createServer((req,res)=>{
            
       })
       
-     //  res.end("muhammad")
+     
    }else{
      res.statusCode = 404
       res.end("not found")
