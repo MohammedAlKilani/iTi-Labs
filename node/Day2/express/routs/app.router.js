@@ -42,8 +42,8 @@ router.get("/",(req,res)=>{
     
            const user = req.body 
            console.log(req.body)
-        let isFind =   userDB.getUseBy_Id(user._id)
-        if(isFind) return res.status(400).json({message:"chang _id is unique"})
+       
+       
          let db =  userDB.addUser(user)
            res.json(db)
            
@@ -53,7 +53,7 @@ router.get("/",(req,res)=>{
      
    router.patch("/user",(req,res)=>{
   
-       res.statusCode = 201
+       res.statusCode = 200
      
         
             const user = req.body 
@@ -117,7 +117,7 @@ router.get("/",(req,res)=>{
        
      } ) 
     router.patch("/post",(req,res)=>{
-       res.statusCode = 201
+       
        
             const post = req.body 
           let db =  postDB.updatePost(post)

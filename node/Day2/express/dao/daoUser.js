@@ -2,7 +2,7 @@ class Users{
 
     constructor(){
             Users.db= [{_id:1, name:"muhammad",age:25},
-                        {_id:2, name:"Ali",age:22},
+                        {_id:2, name:"Ali",age:22}
                         
                     ]
        
@@ -51,7 +51,7 @@ class Users{
 
     getUseBy_Id(_id){
       return  Users.db.find((user)=>{
-            return user._id = _id
+            return user._id == _id
         })
     }
 

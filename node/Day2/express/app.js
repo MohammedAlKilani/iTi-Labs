@@ -23,3 +23,5 @@ app.all("*",(req,res)=>{
 app.listen(port,()=>{
     console.log(`run in 127.0.0.1:${port}`)
 })
+
+module.exports = app

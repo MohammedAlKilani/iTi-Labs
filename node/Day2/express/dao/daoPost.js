@@ -51,7 +51,7 @@ class Post{
 
     getPostBy_Id(_id){
       return  Post.db.find((user)=>{
-            return user._id = _id
+            return user._id == _id
         })
     }
 
