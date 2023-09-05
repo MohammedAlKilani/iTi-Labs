@@ -41,6 +41,10 @@ class Users{
     async getUserBetweenAgeXY(x,y){
     return await db.find({age:{$gt:x,$lt:y}},{password:0})
     }
+    async getUserNameStarWithXAndAgeLessThan(x,y){
+        var regexp = new RegExp("^"+x);
+    return await db.find({userName:regexp,age:{$lt:y}},{password:0})
+    }
 }
 
 export default  Users 

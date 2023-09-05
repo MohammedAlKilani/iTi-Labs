@@ -5,12 +5,19 @@ const userDB = new Users()
 
 export const  getAllUsers =tryCatchErr( async (req,res)=>{
 
-  const {ageX , ageY} = req.query
+  const {ageX , ageY , nameStartX} = req.query
   if(ageX&&ageY) {
     const db = await userDB.getUserBetweenAgeXY(ageX,ageY)
     if(!db?.[0]) return res.status(404).json({message:`Not found users in age between ${ageX} and ${ageY}`}) 
     return res.json(db) 
   }
+  
+  if(nameStartX&&ageY) {
+    const db = await userDB.getUserNameStarWithXAndAgeLessThan(nameStartX,ageY)
+    if(!db?.[0]) return res.status(404).json({message:`Not found users name start with ${nameStartX} and  age less than  ${ageY}`}) 
+    return res.json(db) 
+  }
+
     const db = await userDB.allUsers()
 
     res.json(db) 
