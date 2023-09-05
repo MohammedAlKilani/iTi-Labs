@@ -1,12 +1,11 @@
 import Users from "../dao/daoUser.js"
 import tryCatchErr  from "../module/tryCatchErr.js"
+import userJoi from "../joi/user.joi.js"
 const userDB = new Users()
 
 export const  getAllUsers =tryCatchErr( async (req,res)=>{
 
     const db = await userDB.allUsers()
-
-
 
     res.json(db) 
     })
@@ -31,15 +30,18 @@ export const getUserById =tryCatchErr( async (req,res)=>{
      }
 })
 export const addUser = tryCatchErr( async (req,res)=>{
-    res.statusCode = 201
+ const user = req.body 
+            // console.log(req.body)
+  const valid =   await userJoi.validateAsync(user)
+if(valid){
+   
      
-            const user = req.body 
-            console.log(req.body)
+           
         
           let db = await userDB.addUser(user)
-            res.json(db)
+            res.status(201).json(db)
             
-       
+}
    })
 
 export const updateUser = tryCatchErr( async (req,res)=>{

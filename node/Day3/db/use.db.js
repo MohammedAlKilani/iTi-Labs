@@ -5,7 +5,8 @@ const userSchema = new Schema({
     userName:String,
      email:{
         type:String,
-        unique:true
+        unique:true,
+        require:true
      } ,
       password :String,
      age:Number,

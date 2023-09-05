@@ -1,12 +1,16 @@
 import Post from "../dao/daoPost.js";
 import user from "../dao/daoUser.js";
 import tryCatchErr from "../module/tryCatchErr.js";
+
+import postJoi from "../joi/post.joi.js"
 const postDB = new Post()
 const userDB = new user()
 
 
 export const getAllPosts = tryCatchErr(async (req,res)=>{
-  const withUserData = req.query.userData
+
+
+    const withUserData = req.query.userData
   if(withUserData){
     const db =  await postDB.allPostsWithUserData()
    return res.json( db)
@@ -14,6 +18,8 @@ export const getAllPosts = tryCatchErr(async (req,res)=>{
   const db =await postDB.allPosts()
     
         res.json( db) 
+
+
 }) 
 export const getAllPostsSort =tryCatchErr(async (req,res)=>{
 const db = await postDB.allPostsSortByDate()
@@ -33,16 +39,17 @@ if(post){
 }) 
 
 export const addPost = tryCatchErr(async (req,res)=>{
-  
-
   const post = req.body 
+  const valid =   await postJoi.validateAsync(post)
+if(valid){
+
    const isUser = await  userDB.getUseById(post.userID)
    if(!isUser)return res.status(400).json({message:"id is rong user for id NOT FOUND"})
 
      let db = await postDB.addPost(post)
      res.status(201).json(db)
        
-
+}
  
 })  
 
