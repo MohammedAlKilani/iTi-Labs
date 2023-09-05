@@ -7,7 +7,7 @@ class Users{
     }
     async allUsers(){
         
-           const allUsers = await db.find()
+           const allUsers = await db.find({},{password:0})
         return allUsers 
        
         
@@ -38,7 +38,9 @@ class Users{
         const user = await db.findById(id)
         return user
     }
-
+    async getUserBetweenAgeXY(x,y){
+    return await db.find({age:{$gt:x,$lt:y}},{password:0})
+    }
 }
 
 export default  Users 
