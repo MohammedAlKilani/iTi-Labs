@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import express, { json } from "express"
 import router from "./router/app.routes.js"
-
+import errorHandling from "./module/errorHandling.js"
 
 const app = express()
 const port = 5000
@@ -20,8 +20,6 @@ app.all("*",(req,res)=>{
   // res.statusCode = 404
     res.status(404).send("not found")
 })
- 
-
 
 app.listen(port,()=>{
     console.log(`run in 127.0.0.1:${port}`)
@@ -32,4 +30,6 @@ mongoose.connect("mongodb://localhost:27017/iTiUsersPosts").then(()=>{
 }).catch((err)=>{
   console.log(err)
 })
+
+app.use(errorHandling)
 export default app

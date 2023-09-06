@@ -1,39 +1,39 @@
 import Users from "../dao/daoUser.js"
 import tryCatchErr  from "../module/tryCatchErr.js"
 import userJoi from "../joi/user.joi.js"
-const userDB = new Users()
+const userDao = new Users()
 
 export const  getAllUsers =tryCatchErr( async (req,res)=>{
 
   const {ageX , ageY , nameStartX} = req.query
   if(ageX&&ageY) {
-    const db = await userDB.getUserBetweenAgeXY(ageX,ageY)
+    const db = await userDao.getUserBetweenAgeXY(ageX,ageY)
     if(!db?.[0]) return res.status(404).json({message:`Not found users in age between ${ageX} and ${ageY}`}) 
     return res.json(db) 
   }
   
   if(nameStartX&&ageY) {
-    const db = await userDB.getUserNameStarWithXAndAgeLessThan(nameStartX,ageY)
+    const db = await userDao.getUserNameStarWithXAndAgeLessThan(nameStartX,ageY)
     if(!db?.[0]) return res.status(404).json({message:`Not found users name start with ${nameStartX} and  age less than  ${ageY}`}) 
     return res.json(db) 
   }
 
-    const db = await userDB.allUsers()
+    const db = await userDao.allUsers()
 
     res.json(db) 
     })
 
 
 export const getAllUsersSorted = tryCatchErr( async (req,res)=>{
-    const db = await userDB.allUsersSortByDate()
-  
-      res.json(db) 
+    const data = await userDao.allUsersSortByDate()
+      
+      res.json(data) 
  })
 
 export const getUserById =tryCatchErr( async (req,res)=>{
 
     const userId = req.params.id
-     let user= await userDB.getUseById(userId)
+     let user= await userDao.getUseById(userId)
      if(user){
 
          res.json(user)
@@ -44,17 +44,12 @@ export const getUserById =tryCatchErr( async (req,res)=>{
 })
 export const addUser = tryCatchErr( async (req,res)=>{
  const user = req.body 
-            // console.log(req.body)
-  const valid =   await userJoi.validateAsync(user)
-if(valid){
-   
-     
-           
-        
-          let db = await userDB.addUser(user)
-            res.status(201).json(db)
             
-}
+          let newUser = await userDao.addUser(user)
+          newUser.password = undefined
+            res.status(201).json(newUser)
+            
+
    })
 
 export const updateUser = tryCatchErr( async (req,res)=>{
@@ -64,7 +59,7 @@ export const updateUser = tryCatchErr( async (req,res)=>{
      
          const user = req.body
          const id = req.params.id 
-       let db = await  userDB.updateUser(id,user)
+       let db = await  userDao.updateUser(id,user)
        res.json(db)
          
    
@@ -72,9 +67,27 @@ export const updateUser = tryCatchErr( async (req,res)=>{
 export const deleteUser = tryCatchErr( async (req,res)=>{
   console.log("from deleteUser controller")
   const id = req.params.id 
-  let db = await userDB.deleteUser(id)
+  let db = await userDao.deleteUser(id)
     res.json(db)
     
 
 } )
+
+export const signinUser =tryCatchErr(async (req,res)=>{
+
+    const userFind = await userDao.findUserByEmail(req.body.email)
+    if(userFind){
+
+    const isCorrect =  await  userDao.checkPassword(req.body.password,userFind.password)
+    if(isCorrect){
+       userFind.password = undefined
+      console.log(userFind)
+        return res.json(userFind)
+    }else{
+      return res.status(400).json({message:"Password not correct"})
+    }
+    }else{
+      return res.status(400).json({message:"Email not found && sign up if you not"})
+    }
+})
 

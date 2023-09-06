@@ -1,8 +1,8 @@
 import Post from "../dao/daoPost.js";
 import user from "../dao/daoUser.js";
 import tryCatchErr from "../module/tryCatchErr.js";
-
 import postJoi from "../joi/post.joi.js"
+
 const postDB = new Post()
 const userDB = new user()
 
@@ -40,16 +40,14 @@ if(post){
 
 export const addPost = tryCatchErr(async (req,res)=>{
   const post = req.body 
-  const valid =   await postJoi.validateAsync(post)
-if(valid){
-
+  
    const isUser = await  userDB.getUseById(post.userID)
    if(!isUser)return res.status(400).json({message:"id is rong user for id NOT FOUND"})
 
      let db = await postDB.addPost(post)
      res.status(201).json(db)
        
-}
+
  
 })  
 

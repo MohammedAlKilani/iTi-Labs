@@ -1,4 +1,5 @@
 import db from "../db/use.db.js"
+import bcrypt from "bcrypt"
 class Users{
 
     constructor(){
@@ -20,7 +21,7 @@ class Users{
         
     }
     async allUsersSortByDate(){
-        const allUser = await db.find().sort({createdAt:1})
+        const allUser = await db.find({},{password:0}).sort({createdAt:1})
         return allUser
     }
     async updateUser(id,userReq){
@@ -44,6 +45,13 @@ class Users{
     async getUserNameStarWithXAndAgeLessThan(x,y){
         var regexp = new RegExp("^"+x);
     return await db.find({userName:regexp,age:{$lt:y}},{password:0})
+    }
+
+    async findUserByEmail(email){
+        return await db.findOne({email})
+    }
+    async checkPassword(password , userPasswordInDB){
+     return  await bcrypt.compare(password,userPasswordInDB)
     }
 }
 

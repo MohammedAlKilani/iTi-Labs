@@ -8,3 +8,10 @@ export default Joi.object({
      userID : Joi.objectId()
 
 })
+export const postIdJoiSchema  = Joi.object(
+    {
+        id:Joi.objectId()
+    }
+)
+
+ 

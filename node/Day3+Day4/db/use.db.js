@@ -8,7 +8,10 @@ const userSchema = new Schema({
         unique:true,
         require:true
      } ,
-      password :String,
+      password :{
+         type:String,
+      require:true
+      },
      age:Number,
      gender:{
         type:String,
