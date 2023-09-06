@@ -2,15 +2,17 @@ import mongoose from "mongoose"
 import express, { json } from "express"
 import router from "./router/app.routes.js"
 import errorHandling from "./module/errorHandling.js"
-
+import 'dotenv/config'
+import cookieParser from "cookie-parser"
 const app = express()
-const port = 5000
+const port = process.env.PORT || 5000
 
 app.use((req,res,next)=>{
  console.log(req.method,req.url)
  next()
 })
 
+app.use(cookieParser())
 app.use(json())
 
 

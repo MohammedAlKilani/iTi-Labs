@@ -1,6 +1,7 @@
+import jwt from "jsonwebtoken"
 import Users from "../dao/daoUser.js"
 import tryCatchErr  from "../module/tryCatchErr.js"
-import userJoi from "../joi/user.joi.js"
+import "dotenv"
 const userDao = new Users()
 
 export const  getAllUsers =tryCatchErr( async (req,res)=>{
@@ -43,11 +44,14 @@ export const getUserById =tryCatchErr( async (req,res)=>{
      }
 })
 export const addUser = tryCatchErr( async (req,res)=>{
- const user = req.body 
-            
-          let newUser = await userDao.addUser(user)
-          newUser.password = undefined
-            res.status(201).json(newUser)
+  const user = req.body 
+      const  findUser   = await userDao.findUserByEmail(user.email)
+      if(findUser)return res.status(400).send("email is unique")
+  let newUser = await userDao.addUser(user)
+  newUser.password = undefined
+ const token =  jwt.sign(newUser,process.env.SECRET_KEY,{expiresIn:60*60*24*5})
+ res.cookie("token",token,{ maxAge: 60*60*24*5, httpOnly: true })
+  res.status(201).json(newUser)
             
 
    })
@@ -76,11 +80,15 @@ export const deleteUser = tryCatchErr( async (req,res)=>{
 export const signinUser =tryCatchErr(async (req,res)=>{
 
     const userFind = await userDao.findUserByEmail(req.body.email)
+
+
     if(userFind){
 
     const isCorrect =  await  userDao.checkPassword(req.body.password,userFind.password)
     if(isCorrect){
-       userFind.password = undefined
+      userFind.password = undefined
+      const token =  jwt.sign(userFind.toJSON(),process.env.SECRET_KEY,{expiresIn:60*60*24*5})
+ res.cookie("token",token,{ maxAge: 60*60*24*5, httpOnly: true })
       console.log(userFind)
         return res.json(userFind)
     }else{
@@ -91,3 +99,18 @@ export const signinUser =tryCatchErr(async (req,res)=>{
     }
 })
 
+export const isAuthorized = (req,res,next)=>{
+
+if(req.headers?.authorization?.split(" ")?.[0] =="Bearer ")return res.status(400).json({message:"authorization not have Bearer"})
+
+const token = req.headers.authorization.split(" ")[1] 
+ 
+ const tokenData = jwt.verify(token,process.env.SECRET_KEY)
+ if(tokenData){
+  req.userData = tokenData
+  return next()
+  // res.json(tokenData)
+}
+
+ return res.status(401)
+}

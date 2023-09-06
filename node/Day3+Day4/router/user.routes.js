@@ -1,5 +1,5 @@
 import { Router  } from "express"
-import {getAllUsers,getAllUsersSorted,getUserById ,addUser , updateUser, deleteUser, signinUser} from "../controller/user.controller.js"
+import {getAllUsers,getAllUsersSorted,getUserById ,addUser , updateUser, deleteUser, signinUser, isAuthorized} from "../controller/user.controller.js"
 import { validBody, validparams } from "../module/validate.js"
 import userJoi, { userIdJoiSchema, userSineinSchema } from "../joi/user.joi.js"
 const router = Router()
@@ -19,6 +19,7 @@ router.get("/users",getAllUsers)
 
 
 router.route("/user").post(validBody(userJoi),addUser)
+// router.route("/testAuth").get(isAuthorized)
 
 export default router
 

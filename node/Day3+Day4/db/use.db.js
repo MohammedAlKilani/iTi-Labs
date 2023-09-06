@@ -29,4 +29,4 @@ userSchema.pre("save",async function(){
 })
 
 
-export default model("user",userSchema)
+export default model("User",userSchema)

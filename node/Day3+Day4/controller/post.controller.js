@@ -1,15 +1,14 @@
 import Post from "../dao/daoPost.js";
 import user from "../dao/daoUser.js";
 import tryCatchErr from "../module/tryCatchErr.js";
-import postJoi from "../joi/post.joi.js"
-
+import jwt from "jsonwebtoken";
 const postDB = new Post()
 const userDB = new user()
 
 
 export const getAllPosts = tryCatchErr(async (req,res)=>{
 
-
+  
     const withUserData = req.query.userData
   if(withUserData){
     const db =  await postDB.allPostsWithUserData()
