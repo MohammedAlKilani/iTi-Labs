@@ -19,7 +19,7 @@ router.get("/users",getAllUsers)
 
 
 router.route("/user").post(validBody(userJoi),addUser)
-// router.route("/testAuth").get(isAuthorized)
+router.route("/testAuth").get(isAuthorized)
 
 export default router
 

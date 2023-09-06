@@ -1,6 +1,6 @@
 export default function errorHandling(error,req,res,next){
     console.log(error)
-    if(error.code==11000) return res.status(400).send("email is unique")
+    if(error.code==11000) return res.status(409).send("email is unique")
     if(error?.details){ 
             const messageArr = error.details.map((err)=>{
               return  err.message

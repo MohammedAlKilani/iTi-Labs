@@ -2,7 +2,10 @@ import {Schema, model} from "mongoose";
 import bcrypt from "bcrypt"
 
 const userSchema = new Schema({
-    userName:String,
+    userName:{
+      type: String,
+      require:true
+   },
      email:{
         type:String,
         unique:true,
@@ -15,7 +18,8 @@ const userSchema = new Schema({
      age:Number,
      gender:{
         type:String,
-        enum:["male","female"]
+        enum:["male","female"],
+        require:true
      },
       phone:String
 },{

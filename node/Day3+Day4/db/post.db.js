@@ -1,11 +1,18 @@
 import {Schema, model ,ObjectId} from "mongoose";
 
 const postSchema = new Schema({
-    title:String,
-    content:String ,
+    title:{
+        type: String,
+        require:true
+     },
+    content:{
+       type: String,
+       require:true
+    } ,
      userID : {
        type: ObjectId,
-       ref:"user"
+       ref:"user",
+       require:true
     }
 },{
     timestamps:true

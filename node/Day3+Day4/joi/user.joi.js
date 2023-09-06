@@ -4,11 +4,11 @@ Joi.objectId = joiObjectid(Joi,"userID not Objectid ")
 
 
 export default Joi.object({
-    userName:Joi.string(),
+    userName:Joi.string().required(),
     email:Joi.string().email().required() ,
      password :Joi.string().required().pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/),
-    age:Joi.number(),
-    gender:Joi.string().valid(...["male","female"]),
+    age:Joi.number().required(),
+    gender:Joi.string().valid(...["male","female"]).required(),
      phone:Joi.string().length(11).pattern(/^0(10|11|12|15)\d{8}$/)
 
 })

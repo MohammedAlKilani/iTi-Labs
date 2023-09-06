@@ -46,10 +46,13 @@ export const getUserById =tryCatchErr( async (req,res)=>{
 export const addUser = tryCatchErr( async (req,res)=>{
   const user = req.body 
       const  findUser   = await userDao.findUserByEmail(user.email)
-      if(findUser)return res.status(400).send("email is unique")
-  let newUser = await userDao.addUser(user)
+      if(findUser)return res.status(409).send("email is unique")
+  
+  let newUser = await userDao.addUser(user) 
+    
   newUser.password = undefined
- const token =  jwt.sign(newUser,process.env.SECRET_KEY,{expiresIn:60*60*24*5})
+
+ const token =  jwt.sign(newUser.toJSON(),process.env.SECRET_KEY,{expiresIn:60*60*24*5})
  res.cookie("token",token,{ maxAge: 60*60*24*5, httpOnly: true })
   res.status(201).json(newUser)
             
@@ -101,15 +104,16 @@ export const signinUser =tryCatchErr(async (req,res)=>{
 
 export const isAuthorized = (req,res,next)=>{
 
-if(req.headers?.authorization?.split(" ")?.[0] =="Bearer ")return res.status(400).json({message:"authorization not have Bearer"})
+// if(req.headers?.authorization?.split(" ")?.[0] =="Bearer ")return res.status(400).json({message:"authorization not have Bearer"})
 
-const token = req.headers.authorization.split(" ")[1] 
- 
+// const token = req.headers.authorization.split(" ")[1] 
+const token = req.cookies.token
+
  const tokenData = jwt.verify(token,process.env.SECRET_KEY)
  if(tokenData){
   req.userData = tokenData
-  return next()
-  // res.json(tokenData)
+  // return next()
+  return res.json(tokenData)
 }
 
  return res.status(401)
