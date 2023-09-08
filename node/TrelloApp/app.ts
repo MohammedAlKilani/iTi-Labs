@@ -1,6 +1,9 @@
 import express ,{Express,RequestHandler} from "express";
+import mongoose from "mongoose";
+import "dotenv"
 const app:Express = express()
 const port = process.env.PORT || 3000
+const mongodbURL:string  = process.env.MONGODB_URL||"mongodb://127.0.0.1:27017" 
 
 app.use((req,res,next)=>{
     console.log("Method:",req.method,"URL:",req.url )
@@ -20,3 +23,8 @@ app.listen(port,()=>{
     console.log(`server run in http://127.0.0.1:${port}/api/v1 `)
 })
 
+mongoose.connect(mongodbURL).then(()=>{
+        console.log(`connected with ${mongodbURL}`)
+    }).catch((err)=>{
+        console.log(err)
+    })

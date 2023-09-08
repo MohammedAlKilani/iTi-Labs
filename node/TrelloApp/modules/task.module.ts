@@ -1,8 +1,8 @@
-import {Schema,Types} from "mongoose";
+import {Schema,Types, model} from "mongoose";
 import { Task } from "../interfaces/task.interface";
 
 
-const taskSchema = new Schema<Task>({
+ const taskSchema = new Schema<Task>({
         title:{
                 type:String,
                 require:true
@@ -30,3 +30,5 @@ const taskSchema = new Schema<Task>({
         }
 
 })
+
+export default model<Task>("Task",taskSchema)

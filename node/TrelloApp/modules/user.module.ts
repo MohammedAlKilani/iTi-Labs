@@ -1,5 +1,7 @@
 
-import { Schema } from "mongoose";
+import { Schema , model } from "mongoose";
+import { User } from "../interfaces/user.interface";
+import bcrypt from "bcrypt"
 
 const userSchema = new Schema<User>({
     userName: {
@@ -30,5 +32,17 @@ const userSchema = new Schema<User>({
     isVerified: {
         type:Boolean,
         required:true
+    },
+    softDelete:{
+        type:Boolean,
+        required:true
     }
 })
+
+export default model<User>("User",userSchema)
+userSchema.pre("save",async function(){
+ const salt         =await bcrypt.genSalt(10)
+ const passwordHash = await bcrypt.hash(this.password,salt);
+ this.password = passwordHash
+})
+
