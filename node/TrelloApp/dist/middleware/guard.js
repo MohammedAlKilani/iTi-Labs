@@ -17,13 +17,18 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 require("dotenv/config");
 const guard = (0, tryCatchErr_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    console.log("in guard");
     const token = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.token;
     if (!token)
         return res.status(401).json({ message: "you are logOut" });
-    const tokenData = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
-    if (!tokenData)
-        return res.status(401).json({ message: "you are logOut" });
+    try {
+        const tokenData = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
+        if (!tokenData)
+            return res.status(401).json({ message: "you are logOut" });
+    }
+    catch (error) {
+        res.clearCookie("token").status(400).json({ message: "err in jwt verify you are logOut" });
+        return;
+    }
     next();
 }));
 exports.default = guard;

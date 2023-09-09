@@ -14,5 +14,6 @@ router.post("/login", (0, joiValidator_1.joiValidatorBody)(user_joi_1.userJoiSch
 router.get("/verifie/:token", user_controller_1.Verifi);
 router.route("/softDelete").all(guard_1.default).delete(user_controller_1.softDelete).get(user_controller_1.softDelete);
 router.route("/user").all(guard_1.default).patch(user_controller_1.updateUser).delete(user_controller_1.deleteUser);
+router.route("/user/:id").all(guard_1.default).patch(user_controller_1.updateUser).delete(user_controller_1.deleteUser);
 router.get("/logout", guard_1.default, user_controller_1.logout);
 exports.default = router;

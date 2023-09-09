@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken"
 import "dotenv/config"
 import nodemailer from "nodemailer"
 import { ResInterface } from "../interfaces/app.interface";
+import { ObjectId } from "mongoose";
 
 
 const userDao = new UserDao()
@@ -72,24 +73,42 @@ const data = user as UserRes
 data.password = undefined
 res.json({message:"user is soft Delete",data})
 })
-export const updateUser = tryCatchErr<UserUpdate,ResInterface< UserRes>>(async (req,res)=>{
+export const updateUser = tryCatchErr<UserUpdate,ResInterface< UserRes>,{id:string}>(async (req,res)=>{
    const user = req.body
-   const token:string = req.cookies?.token
+   let id:ObjectId
    if(!(user.age||user.password||user.userName))return res.status(404).json({message:"no age||password||userName to update "})
-  const tokenData = jwt.verify(token,process.env.SECRET_KEY!) as UserRes
+   if(req.params?.id){
+      id = req.params?.id as unknown as ObjectId
+   }else{
 
-  const userUpdate =  await  userDao.updateUser(tokenData._id,user) as UserRes
+      const token =  req.cookies?.token
+      if(!token)return res.status(403).json({message:"you are logOut"})
+      const tokenData = jwt.verify(token,process.env.SECRET_KEY!) as UserRes
+   id= tokenData._id 
+   }
+
+   
+
+  const userUpdate =  await  userDao.updateUser(id,user) as UserRes
   if(!userUpdate)return res.status(403).json({message:"you are logOut"})
   userUpdate.password = undefined
 
   res.json({message:"Updated",data:userUpdate})
 
 })
-export const deleteUser = tryCatchErr<UserUpdate,ResInterface<UserRes>,never,never>(async (req,res)=>{
- const token =  req.cookies?.token
- if(token)return res.status(403).json({message:"you are logOut"})
- const tokenData = jwt.verify(token,process.env.SECRET_KEY!) as UserRes
- const userDeleted =  await  userDao.deleteUserById(tokenData._id) as UserRes
+export const deleteUser = tryCatchErr<UserUpdate,ResInterface<UserRes>,{id:string},never>(async (req,res)=>{
+   let id:ObjectId
+   if(req.params?.id){
+      id = req.params?.id as unknown as ObjectId
+   }else{
+
+      const token =  req.cookies?.token
+      if(!token)return res.status(403).json({message:"you are logOut"})
+      const tokenData = jwt.verify(token,process.env.SECRET_KEY!) as UserRes
+   id= tokenData._id 
+   }
+
+ const userDeleted =  await  userDao.deleteUserById(id) as UserRes
  if(userDeleted) return res.status(404).json({message:"not found user"})
  res.json({message:"Deleted",data:userDeleted})
 

@@ -72,32 +72,48 @@ exports.softDelete = (0, tryCatchErr_1.default)((req, res) => __awaiter(void 0, 
     res.json({ message: "user is soft Delete", data });
 }));
 exports.updateUser = (0, tryCatchErr_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _b;
+    var _b, _c, _d;
     const user = req.body;
-    const token = (_b = req.cookies) === null || _b === void 0 ? void 0 : _b.token;
+    let id;
     if (!(user.age || user.password || user.userName))
         return res.status(404).json({ message: "no age||password||userName to update " });
-    const tokenData = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
-    const userUpdate = yield userDao.updateUser(tokenData._id, user);
+    if ((_b = req.params) === null || _b === void 0 ? void 0 : _b.id) {
+        id = (_c = req.params) === null || _c === void 0 ? void 0 : _c.id;
+    }
+    else {
+        const token = (_d = req.cookies) === null || _d === void 0 ? void 0 : _d.token;
+        if (!token)
+            return res.status(403).json({ message: "you are logOut" });
+        const tokenData = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
+        id = tokenData._id;
+    }
+    const userUpdate = yield userDao.updateUser(id, user);
     if (!userUpdate)
         return res.status(403).json({ message: "you are logOut" });
     userUpdate.password = undefined;
     res.json({ message: "Updated", data: userUpdate });
 }));
 exports.deleteUser = (0, tryCatchErr_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _c;
-    const token = (_c = req.cookies) === null || _c === void 0 ? void 0 : _c.token;
-    if (token)
-        return res.status(403).json({ message: "you are logOut" });
-    const tokenData = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
-    const userDeleted = yield userDao.deleteUserById(tokenData._id);
+    var _e, _f, _g;
+    let id;
+    if ((_e = req.params) === null || _e === void 0 ? void 0 : _e.id) {
+        id = (_f = req.params) === null || _f === void 0 ? void 0 : _f.id;
+    }
+    else {
+        const token = (_g = req.cookies) === null || _g === void 0 ? void 0 : _g.token;
+        if (!token)
+            return res.status(403).json({ message: "you are logOut" });
+        const tokenData = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
+        id = tokenData._id;
+    }
+    const userDeleted = yield userDao.deleteUserById(id);
     if (userDeleted)
         return res.status(404).json({ message: "not found user" });
     res.json({ message: "Deleted", data: userDeleted });
 }));
 exports.logout = (0, tryCatchErr_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _d;
-    const token = (_d = req.cookies) === null || _d === void 0 ? void 0 : _d.token;
+    var _h;
+    const token = (_h = req.cookies) === null || _h === void 0 ? void 0 : _h.token;
     if (token)
         return res.status(403).json({ message: "you are logOut" });
     res.clearCookie("token").json({ message: "you are logOut" });
