@@ -2,8 +2,8 @@ import { Schema } from "mongoose";
 import { Task, TaskAdd, TaskDaoInterface, TaskUpdate, TaskWithUserData } from "../interfaces/task.interface";
 import taskModule from "../modules/task.module";
 export default class TaskDao implements TaskDaoInterface{
-   
-   async addTask(task: TaskAdd): Promise<Task> {
+    
+    async addTask(task: TaskAdd): Promise<Task> {
       return await taskModule.create(task)
       
     }
@@ -17,7 +17,11 @@ export default class TaskDao implements TaskDaoInterface{
        return await taskModule.find()
    }
    async getAllTaskWithUserData(): Promise<[] | TaskWithUserData[]> {
-    return await taskModule.find().populate("userId")
+    return await taskModule.find().populate(["userId","assignTo"])
    }
     
+   async getAllTaskNotDoneAfterDeadline(): Promise<[] | Task[]> {
+    const know = new Date()
+    return await taskModule.find({deadline:{$lt:know},status:{$ne:"done"}})
+   }
 }

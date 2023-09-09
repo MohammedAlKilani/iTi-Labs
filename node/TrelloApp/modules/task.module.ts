@@ -24,7 +24,8 @@ import { Task } from "../interfaces/task.interface";
         } ,
         assignTo:{
                 type: Types.ObjectId,
-                required: true
+                required: true,
+                ref:"User"
         } , 
         deadline:{
                 type:Date,

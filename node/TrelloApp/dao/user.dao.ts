@@ -3,6 +3,9 @@ import { User, UserDaoInterface, UserSignUp, UserUpdate } from "../interfaces/us
 import userModule from "../modules/user.module";
 import bcrypt from "bcrypt"
 export default class UserDao implements UserDaoInterface{
+    async findUserById(id: Schema.Types.ObjectId): Promise<User | null> {
+       return await userModule.findById(id)
+    }
     async verifie(id: Schema.Types.ObjectId, isVerified: boolean): Promise<User | null> {
         return await userModule.findByIdAndUpdate(id,{isVerified},{new:true})
     }
@@ -27,6 +30,7 @@ export default class UserDao implements UserDaoInterface{
     async softDeleteUser(id: Schema.Types.ObjectId, softDelete: boolean): Promise<User | null> {
         return await userModule.findByIdAndUpdate(id,{softDelete},{new:true})
     }
+    
     
 
     

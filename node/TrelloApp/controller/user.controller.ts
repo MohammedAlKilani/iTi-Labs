@@ -60,7 +60,7 @@ export const Verifi = tryCatchErr<never,ResInterface<UserRes>,{token:string}>(as
  
  res.cookie("token",tokenData).json({message:"email is verify",data})
 })
-export const softDelete = tryCatchErr<never,ResInterface<UserRes>,never,{soDel:boolean}>(async (req,res)=>{
+export const softDelete = tryCatchErr<never,ResInterface<UserRes>,never>(async (req,res)=>{
 
    const token = req.cookies?.token
   const tokenData =  jwt.verify(token,process.env.SECRET_KEY!) as UserRes
@@ -96,7 +96,7 @@ export const updateUser = tryCatchErr<UserUpdate,ResInterface< UserRes>,{id:stri
   res.json({message:"Updated",data:userUpdate})
 
 })
-export const deleteUser = tryCatchErr<UserUpdate,ResInterface<UserRes>,{id:string},never>(async (req,res)=>{
+export const deleteUser = tryCatchErr<UserUpdate,ResInterface<UserRes>,{id:string}>(async (req,res)=>{
    let id:ObjectId
    if(req.params?.id){
       id = req.params?.id as unknown as ObjectId

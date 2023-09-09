@@ -10,9 +10,10 @@ const errorHandler = (error, req, res, next) => {
             });
             return res.status(400).json({ message: messageArr });
         }
-        if (error.statusCode == 400 && "body" in error) {
-            res.status(400).json({ message: "req JSON maybe not correct" });
-        }
+        if (error.statusCode == 400 && "body" in error)
+            return res.status(400).json({ message: "req JSON maybe not correct" });
+        if (error.name == "ValidationError")
+            return res.status(404).json({ message: error.message });
         console.log(error);
         return res.status(500).json({ message: 'Internal server error', error });
     }

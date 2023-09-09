@@ -22,7 +22,8 @@ const taskSchema = new mongoose_1.Schema({
     },
     assignTo: {
         type: mongoose_1.Types.ObjectId,
-        required: true
+        required: true,
+        ref: "User"
     },
     deadline: {
         type: Date,

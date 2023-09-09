@@ -15,6 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const user_module_1 = __importDefault(require("../modules/user.module"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 class UserDao {
+    findUserById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield user_module_1.default.findById(id);
+        });
+    }
     verifie(id, isVerified) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield user_module_1.default.findByIdAndUpdate(id, { isVerified }, { new: true });

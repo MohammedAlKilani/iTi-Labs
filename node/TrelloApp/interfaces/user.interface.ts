@@ -21,6 +21,7 @@ export interface UserDaoInterface {
     verifie(id:ObjectId,isVerified:boolean):Promise<User|null>,
     deleteUserById(id:ObjectId):Promise<User|null>,
     softDeleteUser(id:ObjectId,softDelete:boolean):Promise<User|null>,
+    findUserById(id:ObjectId):Promise<User|null>
 }
 
 export type UserRes = Omit<User,"password">&{

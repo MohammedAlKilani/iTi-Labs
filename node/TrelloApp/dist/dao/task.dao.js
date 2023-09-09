@@ -36,7 +36,13 @@ class TaskDao {
     }
     getAllTaskWithUserData() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield task_module_1.default.find().populate("userId");
+            return yield task_module_1.default.find().populate(["userId", "assignTo"]);
+        });
+    }
+    getAllTaskNotDoneAfterDeadline() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const know = new Date();
+            return yield task_module_1.default.find({ deadline: { $lt: know }, status: { $ne: "done" } });
         });
     }
 }

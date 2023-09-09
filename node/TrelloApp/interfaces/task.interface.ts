@@ -23,5 +23,7 @@ export interface TaskDaoInterface{
     updateTask(id:ObjectId,task:TaskUpdate):Promise<Task|null>,
     deleteTask(id:ObjectId):Promise<Task|null>,
     getAllTask():Promise<Task[]|[]>,
-    getAllTaskWithUserData():Promise<TaskWithUserData[]|[]>
+    getAllTaskWithUserData():Promise<TaskWithUserData[]|[]>,
+    getAllTaskNotDoneAfterDeadline():Promise<Task[]|[]>,
+
 }
