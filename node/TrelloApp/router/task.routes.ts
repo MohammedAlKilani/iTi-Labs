@@ -1,4 +1,5 @@
 import {Router} from "express"
+import guard from "../middleware/guard"
 const route = Router()
 
-route.route("/post").get().post().patch().delete()
+route.route("/post").all(guard).get().post().patch().delete()

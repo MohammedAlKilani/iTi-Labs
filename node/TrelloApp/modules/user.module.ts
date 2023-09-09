@@ -1,6 +1,6 @@
 
 import { Schema , model } from "mongoose";
-import { User } from "../interfaces/user.interface";
+import { User, UserUpdate } from "../interfaces/user.interface";
 import bcrypt from "bcrypt"
 
 const userSchema = new Schema<User>({
@@ -10,7 +10,9 @@ const userSchema = new Schema<User>({
     },
     email: {
         type:String,
-        required:true
+        unique:true,
+        required:true,
+        
     },
     password:{
         type:String,
@@ -31,18 +33,27 @@ const userSchema = new Schema<User>({
     },
     isVerified: {
         type:Boolean,
-        required:true
+        required:true,
+        default:false
     },
     softDelete:{
         type:Boolean,
-        required:true
+        required:true,
+        default:false
     }
+},{
+    timestamps:true
 })
 
-export default model<User>("User",userSchema)
-userSchema.pre("save",async function(){
- const salt         =await bcrypt.genSalt(10)
+userSchema.pre<User>("save",async function(){
+   
+         const salt         =await bcrypt.genSalt(10)
  const passwordHash = await bcrypt.hash(this.password,salt);
  this.password = passwordHash
+    
+
 })
+
+
+export default model<User>("User",userSchema)
 

@@ -14,11 +14,13 @@ import { Task } from "../interfaces/task.interface";
         status:{
                 type:String,
                 enum:["toDo","doing","done"],
-                required:true
+               
+                default:"toDo"
                 },
         userId:{
                 type:Types.ObjectId,
-                required:true
+                required:true,
+                ref:"User"
         } ,
         assignTo:{
                 type: Types.ObjectId,
@@ -29,6 +31,8 @@ import { Task } from "../interfaces/task.interface";
                 required:true
         }
 
+},{
+        timestamps:true
 })
 
 export default model<Task>("Task",taskSchema)

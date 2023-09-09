@@ -18,10 +18,10 @@ export type TaskUpdate = Pick<Task,"title"|"description"|"status">
 
 export type TaskWithUserData = Omit<Task,"userId"> & {userId:User}
 
-export interface TaskDao{
+export interface TaskDaoInterface{
     addTask(task:TaskAdd):Promise<Task>,
-    updateTask(id:ObjectId,task:TaskUpdate):Promise<Task>,
-    deleteTask(id:ObjectId):Promise<Task>,
-    getAllTask():Promise<Task>,
-    getAllTaskWithUserData():Promise<TaskWithUserData>
+    updateTask(id:ObjectId,task:TaskUpdate):Promise<Task|null>,
+    deleteTask(id:ObjectId):Promise<Task|null>,
+    getAllTask():Promise<Task[]|[]>,
+    getAllTaskWithUserData():Promise<TaskWithUserData[]|[]>
 }

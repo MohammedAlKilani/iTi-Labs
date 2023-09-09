@@ -1,7 +1,8 @@
 import { Router } from "express";
 import userRouter from "./user.routes";
 
-const route =Router()
+export const routeApp =Router()
 
-route.all("/users",userRouter)
-route.all("/tasks",)
+routeApp.use("/users",userRouter)
+// routeApp.use("/tasks")
+  

@@ -13,11 +13,12 @@ const taskSchema = new mongoose_1.Schema({
     status: {
         type: String,
         enum: ["toDo", "doing", "done"],
-        required: true
+        default: "toDo"
     },
     userId: {
         type: mongoose_1.Types.ObjectId,
-        required: true
+        required: true,
+        ref: "User"
     },
     assignTo: {
         type: mongoose_1.Types.ObjectId,
@@ -27,5 +28,7 @@ const taskSchema = new mongoose_1.Schema({
         type: Date,
         required: true
     }
+}, {
+    timestamps: true
 });
 exports.default = (0, mongoose_1.model)("Task", taskSchema);

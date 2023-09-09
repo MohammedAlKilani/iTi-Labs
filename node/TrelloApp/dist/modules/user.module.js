@@ -21,7 +21,8 @@ const userSchema = new mongoose_1.Schema({
     },
     email: {
         type: String,
-        required: true
+        unique: true,
+        required: true,
     },
     password: {
         type: String,
@@ -41,14 +42,17 @@ const userSchema = new mongoose_1.Schema({
     },
     isVerified: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
     softDelete: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     }
+}, {
+    timestamps: true
 });
-exports.default = (0, mongoose_1.model)("User", userSchema);
 userSchema.pre("save", function () {
     return __awaiter(this, void 0, void 0, function* () {
         const salt = yield bcrypt_1.default.genSalt(10);
@@ -56,3 +60,4 @@ userSchema.pre("save", function () {
         this.password = passwordHash;
     });
 });
+exports.default = (0, mongoose_1.model)("User", userSchema);
