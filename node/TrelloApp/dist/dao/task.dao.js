@@ -36,7 +36,7 @@ class TaskDao {
     }
     getAllTaskWithUserData() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield task_module_1.default.find().populate(["userId", "assignTo"]);
+            return yield task_module_1.default.find().populate([{ path: 'userId', select: '-password' }, { path: "assignTo", select: '-password' }]);
         });
     }
     getAllTaskNotDoneAfterDeadline() {

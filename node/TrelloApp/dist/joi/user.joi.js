@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userJoiSchemaLogeIn = exports.userJoiSchemaSignUp = void 0;
+exports.userIdSchema = exports.userJoiSchemaUpdateIdInBody = exports.userJoiSchemaUpdate = exports.userJoiSchemaLogeIn = exports.userJoiSchemaSignUp = void 0;
 const joi_1 = __importDefault(require("joi"));
 exports.userJoiSchemaSignUp = joi_1.default.object({
     userName: joi_1.default.string().min(5).max(30).required(),
@@ -16,4 +16,18 @@ exports.userJoiSchemaSignUp = joi_1.default.object({
 exports.userJoiSchemaLogeIn = joi_1.default.object({
     email: joi_1.default.string().email({ tlds: { allow: ["com", "net", "lol"] } }).required(),
     password: joi_1.default.string().pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/).required(),
+});
+exports.userJoiSchemaUpdate = joi_1.default.object({
+    userName: joi_1.default.string().min(5).max(30),
+    age: joi_1.default.number().min(18).max(60),
+    password: joi_1.default.string().pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/),
+});
+exports.userJoiSchemaUpdateIdInBody = joi_1.default.object({
+    id: joi_1.default.string().pattern(/^[0-9a-fA-F]{24}$/).required(),
+    userName: joi_1.default.string().min(5).max(30),
+    age: joi_1.default.number().min(18).max(60),
+    password: joi_1.default.string().pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/),
+});
+exports.userIdSchema = joi_1.default.object({
+    id: joi_1.default.string().pattern(/^[0-9a-fA-F]{24}$/).required(),
 });

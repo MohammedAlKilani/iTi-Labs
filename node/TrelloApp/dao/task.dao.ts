@@ -17,7 +17,7 @@ export default class TaskDao implements TaskDaoInterface{
        return await taskModule.find()
    }
    async getAllTaskWithUserData(): Promise<[] | TaskWithUserData[]> {
-    return await taskModule.find().populate(["userId","assignTo"])
+    return await taskModule.find().populate([{path: 'userId', select: '-password'},{path: "assignTo", select: '-password'}])
    }
     
    async getAllTaskNotDoneAfterDeadline(): Promise<[] | Task[]> {
