@@ -71,7 +71,7 @@ export const softDelete = tryCatchErr<never,ResInterface<UserRes>,never>(async (
 const user =  await userDao.softDeleteUser(tokenData._id,isDelete)
 const data = user as UserRes
 data.password = undefined
-res.json({message:"user is soft Delete",data})
+res.clearCookie("token").json({message:"user is soft Delete",data})
 })
 export const updateUser = tryCatchErr<UserUpdate,ResInterface< UserRes>,{id:string}>(async (req,res)=>{
    const user = req.body
@@ -79,21 +79,25 @@ export const updateUser = tryCatchErr<UserUpdate,ResInterface< UserRes>,{id:stri
    if(!(user.age||user.password||user.userName))return res.status(404).json({message:"no age||password||userName to update "})
    if(req.params?.id){
       id = req.params?.id as unknown as ObjectId
+      
    }else{
 
       const token =  req.cookies?.token
+
       if(!token)return res.status(403).json({message:"you are logOut"})
       const tokenData = jwt.verify(token,process.env.SECRET_KEY!) as UserRes
    id= tokenData._id 
    }
 
    
-
+   // console.log(id)
   const userUpdate =  await  userDao.updateUser(id,user) as UserRes
-  if(!userUpdate)return res.status(403).json({message:"you are logOut"})
+//   console.log(userUpdate)
+  if(!userUpdate)return res.status(403).json({message:"you are logOut "})
   userUpdate.password = undefined
-
-  res.json({message:"Updated",data:userUpdate})
+const token = jwt.sign(userUpdate.toJSON(),process.env.SECRET_KEY!)
+    return  res.cookie("token",token).json({message:"Updated",data:userUpdate})
+  
 
 })
 export const deleteUser = tryCatchErr<UserUpdate,ResInterface<UserRes>,{id:string}>(async (req,res)=>{

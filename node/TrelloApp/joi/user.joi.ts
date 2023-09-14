@@ -23,7 +23,7 @@ export const userJoiSchemaUpdate =joi.object<UserUpdate>({
 })
 type  UserUpdateIdInBody = UserUpdate & {id:string}
 export const userJoiSchemaUpdateIdInBody =joi.object<UserUpdateIdInBody>({
-    id: joi.string().pattern(/^[0-9a-fA-F]{24}$/).required(),
+    id: joi.string().pattern(/^[0-9a-fA-F]{24}$/),
     userName: joi.string().min(5).max(30),
     age:joi.number().min(18).max(60),
     password: joi.string().pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/),

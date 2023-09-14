@@ -69,7 +69,7 @@ exports.softDelete = (0, tryCatchErr_1.default)((req, res) => __awaiter(void 0, 
     const user = yield userDao.softDeleteUser(tokenData._id, isDelete);
     const data = user;
     data.password = undefined;
-    res.json({ message: "user is soft Delete", data });
+    res.clearCookie("token").json({ message: "user is soft Delete", data });
 }));
 exports.updateUser = (0, tryCatchErr_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _b, _c, _d;
@@ -87,11 +87,14 @@ exports.updateUser = (0, tryCatchErr_1.default)((req, res) => __awaiter(void 0, 
         const tokenData = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
         id = tokenData._id;
     }
+    // console.log(id)
     const userUpdate = yield userDao.updateUser(id, user);
+    //   console.log(userUpdate)
     if (!userUpdate)
-        return res.status(403).json({ message: "you are logOut" });
+        return res.status(403).json({ message: "you are logOut " });
     userUpdate.password = undefined;
-    res.json({ message: "Updated", data: userUpdate });
+    const token = jsonwebtoken_1.default.sign(userUpdate.toJSON(), process.env.SECRET_KEY);
+    return res.cookie("token", token).json({ message: "Updated", data: userUpdate });
 }));
 exports.deleteUser = (0, tryCatchErr_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _e, _f, _g;
