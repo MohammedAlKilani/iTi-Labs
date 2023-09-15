@@ -4,7 +4,8 @@ import UserDao from "../dao/user.dao";
 import { ResInterface } from "../interfaces/app.interface";
 import { Task, TaskAdd, TaskUpdate, TaskWithUserData } from "../interfaces/task.interface";
 import tryCatchErr from "../middleware/tryCatchErr";
-
+import jwt from "jsonwebtoken"
+import { UserRes } from "../interfaces/user.interface";
 const userDao = new UserDao()
 const taskDao = new TaskDao()
 export const addTask = tryCatchErr<TaskAdd,ResInterface<Task>>(async (req,res)=>{
@@ -25,17 +26,23 @@ export const updateTask = tryCatchErr<TaskUpdate,ResInterface<Task>,{id:string}>
 const id =req.params.id as unknown as ObjectId
 if(!id)return res.status(404).json({message:"No id found"})
 const taskToUpdate = req.body
+const token =  req.cookies?.token
+const tokenData =  jwt.verify(token,process.env.SECRET_KEY!)as UserRes
+if(!tokenData)return res.status(401).json({message:"you are logOut"})
 if(!(taskToUpdate.title||taskToUpdate.status||taskToUpdate.description))return res.status(404).json({message:"No title||status||description found"})
-const taskUpdated = await taskDao.updateTask(id,taskToUpdate)
-if(!taskUpdated)return res.status(404).json({message:`No found task in id:${id}`})
+const taskUpdated = await taskDao.updateTask(id,tokenData._id,taskToUpdate) 
+if(!taskUpdated)return res.status(404).json({message:`No found task in id:${id} or you are not creator`})
 res.json({message:"Updated task",data:taskUpdated})
 
 })
 export const deleteTask = tryCatchErr<never,ResInterface<Task>,{id:string}>(async (req,res)=>{
     const id =req.params.id as unknown as ObjectId
     if(!id)return res.status(404).json({message:"No id found"})
-    const taskDeleted = await taskDao.deleteTask(id);
-    if(!taskDeleted)return res.status(404).json({message:`No found task in id:${id}`})
+    const token =  req.cookies?.token
+    const tokenData =  jwt.verify(token,process.env.SECRET_KEY!)as UserRes
+if(!tokenData)return res.status(401).json({message:"you are logOut"})
+    const taskDeleted = await taskDao.deleteTask(id,tokenData._id);
+    if(!taskDeleted)return res.status(404).json({message:`No found task in id:${id} or you are not creator`})
     res.json({message:"Deleted task",data:taskDeleted})
 })
 export const getAllTask = tryCatchErr<never,ResInterface<TaskWithUserData[]|Task[]>,{id:string},{userData?:"true"|"false",afDed?:"true"|"false"}>(async (req,res)=>{

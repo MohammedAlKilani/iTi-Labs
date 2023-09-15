@@ -20,8 +20,8 @@ export type TaskWithUserData = Omit<Task,"userId"> & {userId:User}
 
 export interface TaskDaoInterface{
     addTask(task:TaskAdd):Promise<Task>,
-    updateTask(id:ObjectId,task:TaskUpdate):Promise<Task|null>,
-    deleteTask(id:ObjectId):Promise<Task|null>,
+    updateTask(id:ObjectId,userId:ObjectId,task:TaskUpdate):Promise<Task|null>,
+    deleteTask(id:ObjectId,userId:ObjectId):Promise<Task|null>,
     getAllTask():Promise<Task[]|[]>,
     getAllTaskWithUserData():Promise<TaskWithUserData[]|[]>,
     getAllTaskNotDoneAfterDeadline():Promise<Task[]|[]>,

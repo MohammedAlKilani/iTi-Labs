@@ -14,8 +14,8 @@ exports.taskJoiSchema = joi_1.default.object({
     deadline: joi_1.default.date().required()
 });
 exports.taskJoiSchemaUpdate = joi_1.default.object({
-    title: joi_1.default.string().min(5).max(50).required(),
-    description: joi_1.default.string().min(5).max(50).required(),
+    title: joi_1.default.string().min(5).max(50),
+    description: joi_1.default.string().min(5).max(50),
     status: joi_1.default.string().valid("toDo", "doing", "done"),
 });
 exports.taskIdSchema = joi_1.default.object({

@@ -7,11 +7,11 @@ export default class TaskDao implements TaskDaoInterface{
       return await taskModule.create(task)
       
     }
-   async updateTask(id: Schema.Types.ObjectId, task: TaskUpdate): Promise<Task|null> {
-        return await taskModule.findByIdAndUpdate(id,task,{new:true})
+   async updateTask(id: Schema.Types.ObjectId,userId:Schema.Types.ObjectId, task: TaskUpdate): Promise<Task|null> {
+        return await taskModule.findOneAndUpdate({_id:id,userId},task,{new:true})
     }
-    async  deleteTask(id: Schema.Types.ObjectId): Promise<Task |null> {
-       return await taskModule.findByIdAndDelete(id)
+    async  deleteTask(id: Schema.Types.ObjectId , userId:Schema.Types.ObjectId): Promise<Task |null> {
+       return await taskModule.findOneAndDelete({_id:id,userId})
    }
    async getAllTask(): Promise<[] | Task[]> {
        return await taskModule.find()

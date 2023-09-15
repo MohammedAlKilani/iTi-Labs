@@ -19,14 +19,14 @@ class TaskDao {
             return yield task_module_1.default.create(task);
         });
     }
-    updateTask(id, task) {
+    updateTask(id, userId, task) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield task_module_1.default.findByIdAndUpdate(id, task, { new: true });
+            return yield task_module_1.default.findOneAndUpdate({ _id: id, userId }, task, { new: true });
         });
     }
-    deleteTask(id) {
+    deleteTask(id, userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield task_module_1.default.findByIdAndDelete(id);
+            return yield task_module_1.default.findOneAndDelete({ _id: id, userId });
         });
     }
     getAllTask() {
